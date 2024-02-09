@@ -1,24 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-// take in the url
 function useQuery(url) {
   const [isLoaded, setIsLoaded] = useState(false);
-  // rename `posts` to a more generic `data`
   const [data, setData] = useState(null);
 
   useEffect(() => {
     setIsLoaded(false);
     fetch(url)
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        setData(responseData);
         setIsLoaded(true);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setIsLoaded(false);
       });
   }, [url]);
-  // the url is now a dependency
-  // we want to use the side effect whenever the url changes
 
-  // return an *object* with the data and isLoaded state
   return { data, isLoaded };
 }
 

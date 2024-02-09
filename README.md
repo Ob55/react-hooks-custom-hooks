@@ -14,7 +14,7 @@ and `useHistory` hooks from React Router are hooks that let us access the
 this lesson, you'll learn how to create your own custom hooks by extracting
 hooks-related logic out of components and into a reusable hook function.
 
-## Setup
+## Setup.
 
 This lesson has some starter code for a blog site using React Router. The data
 for the blog is saved in a `db.json` file, which we'll serve up using
